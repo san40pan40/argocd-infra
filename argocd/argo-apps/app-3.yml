@@ -12,3 +12,7 @@ spec:
     path: apps/app-3
     repoURL: https://github.com/san40pan40/argocd-infra.git
     targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

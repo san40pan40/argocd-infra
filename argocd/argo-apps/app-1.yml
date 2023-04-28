@@ -13,4 +13,4 @@ spec:
   source:
     path: apps/app-1
     repoURL: https://github.com/san40pan40/argocd-infra.git
-    targetRevision: HEAD
+    targetRevision: main

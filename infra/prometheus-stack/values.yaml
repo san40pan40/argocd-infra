@@ -1,0 +1,66 @@
+prometheus-stack:
+  defaultRules:
+    rules:
+      etcd: false
+      kubeScheduler: false
+  kubeControllerManager:
+    enabled: false
+  kubeEtcd:
+    enabled: false
+  kubeScheduler:
+    enabled: false
+
+  grafana:
+    enabled: true
+    adminPassword: 12345
+    persistence:
+      enabled: true
+    ingress:
+      ingressClassName: nginx
+      enabled: true
+      annotations:
+        kubernetes.io/tls-acme: "true"
+        external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
+      hosts:
+        - grafana.demo.local
+      path: /
+      tls:
+        - secretName: grafana.demo.local-tls
+          hosts:
+          - grafana.demo.local
+    sidecar:
+      datasources:
+        enabled: true
+    plugins:
+    - grafana-piechart-panel
+    - grafana-clock-panel
+
+  alertmanager:
+    ingress:
+      ingressClassName: nginx
+      enabled: true
+      annotations:
+        kubernetes.io/tls-acme: "false"
+        external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
+      hosts:
+        - alertmanager.demo.local
+      path: /
+      tls:
+        - secretName: alertmanager.demo.local-tls
+          hosts:
+          - alertmanager.demo.local
+
+  prometheus:
+    ingress:
+      ingressClassName: nginx
+      enabled: true
+      annotations:
+        kubernetes.io/tls-acme: "false"
+        external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
+      hosts:
+        - prometheus.demo.local
+      path: /
+      tls:
+        - secretName: prometheus.demo.local-tls
+          hosts:
+          - prometheus.demo.local

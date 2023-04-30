@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: my-app-2
-  namespace: default
+  namespace: argocd
 spec:
   destination:
     namespace: apps
@@ -13,6 +13,8 @@ spec:
     repoURL: https://github.com/san40pan40/argocd-infra.git
     targetRevision: main
   syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
     automated:
       prune: true
       selfHeal: true

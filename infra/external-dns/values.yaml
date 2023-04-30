@@ -1,0 +1,33 @@
+external-dns:
+  replicas: 1
+  provider: cloudflare
+  logLevel: info
+  txtPrefix: "demo_"
+
+  domainFilters:
+    - demo.local
+
+  cloudflare:
+    apiToken: demo
+    apiKey: demo
+    email: demo
+
+  securityContext:
+    allowPrivilegeEscalation: false
+    readOnlyRootFilesystem: true
+    capabilities:
+      drop: ["ALL"]
+
+  podSecurityContext:
+    runAsNonRoot: true
+
+  resources:
+    limits:
+      cpu: 50m
+      memory: 50Mi
+    requests:
+      memory: 50Mi
+      cpu: 10m
+
+  metrics:
+    enabled: true

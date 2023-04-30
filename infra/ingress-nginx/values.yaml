@@ -1,8 +1,7 @@
 ingress-nginx:
   controller:
     service:
-      externalIPs:
-        - "192.168.1.111"
+      type: NodePort
     autoscaling:
       enabled: true
       minReplicas: 2

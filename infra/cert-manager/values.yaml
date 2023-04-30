@@ -1,0 +1,14 @@
+ingress-nginx:
+  controller:
+    autoscaling:
+      enabled: true
+      minReplicas: 2
+      maxReplicas: 4
+      targetMemoryUtilizationPercentage: 80
+    resources:
+      limits:
+        cpu: 100m
+        memory: 256Mi
+      requests:
+        cpu: 100m
+        memory: 256Mi

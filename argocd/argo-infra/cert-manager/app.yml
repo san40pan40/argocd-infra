@@ -5,11 +5,11 @@ metadata:
   namespace: argocd
 spec:
   destination:
-    namespace: ingress-nginx
+    namespace: cert-manager
     server: https://kubernetes.default.svc
   project: default
   source:
-    path: infra/ingress-nginx
+    path: infra/cert-manager
     repoURL: https://github.com/san40pan40/argocd-infra.git
     targetRevision: main
     helm:

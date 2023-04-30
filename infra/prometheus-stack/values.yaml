@@ -13,8 +13,6 @@ kube-prometheus-stack:
   grafana:
     enabled: true
     adminPassword: "12345"
-    persistence:
-      enabled: true
     ingress:
       ingressClassName: nginx
       enabled: true

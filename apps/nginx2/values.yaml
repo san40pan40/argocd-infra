@@ -65,7 +65,7 @@ ingress:
   annotations:
     kubernetes.io/tls-acme: "false"
   hosts:
-    - host: nginx.demo.local
+    - host: nginx2.demo.local
       paths:
         - path: /
           pathType: ImplementationSpecific

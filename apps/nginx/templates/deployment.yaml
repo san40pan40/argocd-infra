@@ -27,6 +27,40 @@ spec:
       serviceAccountName: {{ include "nginx.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      initContainers:
+      - name: wait-for-redis
+        image: docker.io/bitnami/redis:7.0.11-debian-11-r3
+        command:
+          - /bin/bash
+        args:
+          - '-ec'
+          - |
+            #!/bin/bash
+
+            set -o errexit
+            set -o nounset
+            set -o pipefail
+
+            check_redis_connection() {
+              local result="$(redis-cli -h argocd-redis-master -p 6379  PING)"
+              if [[ "$result" != "PONG" ]]; then
+                false
+              fi
+            }
+
+            info "Checking redis connection..."
+            if ! retry_while "check_redis_connection"; then
+                error "Could not connect to the Redis server"
+                return 1
+            else
+                info "Connected to the Redis instance"
+            fi
+        env:
+          - name: REDISCLI_AUTH
+            value: {{ .Values.global.redis.password }}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        imagePullPolicy: IfNotPresent
       containers:
         - name: {{ .Chart.Name }}
           securityContext:

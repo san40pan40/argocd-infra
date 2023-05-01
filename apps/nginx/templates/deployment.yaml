@@ -45,7 +45,7 @@ spec:
             . /opt/bitnami/scripts/liblog.sh
             
             check_redis_connection() {
-              local result="$(redis-cli -h argocd-redis-master -p 6379  PING)"
+              local result="$(redis-cli -h nginx-redis-master -p 6379  PING)"
               if [[ "$result" != "PONG" ]]; then
                 false
               fi

@@ -14,5 +14,4 @@ spec:
     path: argocd/argo-infra
     repoURL: https://github.com/san40pan40/argocd-infra.git
     targetRevision: main
-  syncPolicy:
-    automated: {}
+  syncPolicy: {}

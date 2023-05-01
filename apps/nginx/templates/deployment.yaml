@@ -41,6 +41,9 @@ spec:
             set -o nounset
             set -o pipefail
 
+            . /opt/bitnami/scripts/libos.sh
+            . /opt/bitnami/scripts/liblog.sh
+            
             check_redis_connection() {
               local result="$(redis-cli -h argocd-redis-master -p 6379  PING)"
               if [[ "$result" != "PONG" ]]; then
